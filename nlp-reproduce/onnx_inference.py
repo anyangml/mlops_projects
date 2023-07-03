@@ -3,7 +3,6 @@ import onnxruntime as ort
 from scipy.special import softmax
 
 from data import DataModule
-from utils import timing
 
 
 class ColaONNXPredictor:
@@ -12,7 +11,6 @@ class ColaONNXPredictor:
         self.processor = DataModule()
         self.labels = ["unacceptable", "acceptable"]
 
-    @timing
     def predict(self, text):
         inference_sample = {"sentence": text}
         processed = self.processor.tokenize_data(inference_sample)
@@ -25,7 +23,7 @@ class ColaONNXPredictor:
         scores = softmax(ort_outs[0])[0]
         predictions = []
         for score, label in zip(scores, self.labels):
-            predictions.append({"label": label, "score": score})
+            predictions.append({"label": label, "score": float(score)})
         return predictions
 
 
