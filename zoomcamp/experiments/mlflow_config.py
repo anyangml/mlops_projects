@@ -1,7 +1,4 @@
-MLFLOW_TRACKING_URI = "sqlite:///mlflow.db"
-EXPERIMENT_NAME = "nyc-taxi-experiment"
-ARTIFACT_REPOSITORY = "s3://anyang-mlops/zoomcamp/nyc-taxi-experiment"
-
+from env import MLFLOW_TRACKING_URI, ARTIFACT_REPOSITORY, EXPERIMENT_NAME
 import mlflow
 
 

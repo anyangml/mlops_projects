@@ -1,0 +1,5 @@
+MLFLOW_TRACKING_URI = "sqlite:///mlflow.db"
+EXPERIMENT_NAME = "nyc-taxi-experiment"
+ARTIFACT_REPOSITORY = "s3://anyang-mlops/zoomcamp/nyc-taxi-experiment"
+DATA_URL_TRAIN = "https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2021-01.parquet"
+DATA_URL_VALID = "https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2021-02.parquet"
