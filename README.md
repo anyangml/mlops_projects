@@ -1,4 +1,4 @@
 # ML-OPS
 
 ## Resources
-- [Commen workflows](https://mymlops.com/)
+- [Common workflows](https://mymlops.com/)

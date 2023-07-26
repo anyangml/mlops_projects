@@ -61,15 +61,13 @@ class Experiment:
             mlflow.log_metric("rmse", rmse)
             if log_artifact:
                 mlflow.sklearn.log_model(model, "model")
-            
+
             self.cur_run_id = mlflow.active_run().info.run_id
 
-
         print(f"RMSE: {rmse}")
-        
 
         return model
-    
+
     def get_run_id(self):
         return self.cur_run_id
 
