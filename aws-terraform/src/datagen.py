@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 from pydantic import Field
-from pydantic import PrivateAttr
 from typing import List
 from pydantic import validator
 import numpy as np
@@ -13,24 +12,24 @@ class Data(BaseModel):
         frozen = True
         arbitrary_types_allowed = True
 
-    _nfeature: int = PrivateAttr(default=3)
-    _nsamples: int = PrivateAttr(default=5000)
+    _nfeature: int = 3
+    _nsamples: int = 5000
 
     X: np.ndarray = Field(..., description="Input features")
     y: np.ndarray = Field(..., description="Outputs")
 
     @validator("X")
     def validate_X(cls, value):
-        if value.shape != (cls._nsamples.get_default(), cls._nfeature.get_default()):
+        if value.shape != (cls._nsamples, cls._nfeature):
             raise ValueError(
-                f"X must have {cls._nfeature.get_default()} features and {cls._nsamples.get_default()} samples."
+                f"X must have {cls._nfeature} features and {cls._nsamples} samples."
             )
         return value
 
     @validator("y")
     def validate_y(cls, value):
-        if value.shape != (cls._nsamples.get_default(),):
-            raise ValueError(f"y must have {cls._nsamples.get_default()} samples.")
+        if value.shape != (cls._nsamples,):
+            raise ValueError(f"y must have {cls._nsamples} samples.")
         return value
 
     def split_data(self, test_size=0.2):
@@ -45,9 +44,9 @@ class DataGenerator(BaseModel):
         extra = "forbid"
         frozen = True
 
-    _features: List[str] = PrivateAttr(default=["feature1", "feature2", "feature3"])
-    _nfeature: int = PrivateAttr(default=3)
-    _nsamples: int = PrivateAttr(default=5000)
+    _features: List[str] = ["feature1", "feature2", "feature3"]
+    _nfeature: int = 3
+    _nsamples: int = 5000
 
     name: str
     intercepts: List[float] = Field(
@@ -60,10 +59,8 @@ class DataGenerator(BaseModel):
 
     @validator("intercepts")
     def validate_intercepts(cls, value):
-        if len(value) != cls._nfeature.get_default():
-            raise ValueError(
-                f"Intercepts must have {cls._nfeature.get_default()} values."
-            )
+        if len(value) != cls._nfeature:
+            raise ValueError(f"Intercepts must have {cls._nfeature} values.")
         return value
 
     def generate_data(self):
