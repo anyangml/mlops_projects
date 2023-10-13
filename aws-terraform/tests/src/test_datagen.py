@@ -4,13 +4,11 @@ import numpy as np
 
 
 def test_data_validation():
-
     with pytest.raises(ValueError, match="y must have"):
         Data(X=np.array([[1, 2, 3]]), y=np.array([1, 2, 3, 4]))
 
 
 def test_data_split(X, y):
-
     data = Data(X=X, y=y)
 
     X_train, y_train, X_test, y_test = data.split_data(test_size=0.2)
@@ -30,6 +28,5 @@ def test_data_generator():
 
 
 def test_data_generator_validation():
-
     with pytest.raises(ValueError):
         DataGenerator(name="test", intercepts=[1, 2], bias=0.5)

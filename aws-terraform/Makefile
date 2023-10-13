@@ -13,7 +13,6 @@ init: ## install poetry and dependencies
 
 .PHONY: format
 format: ## run code formatters
-	poetry run python -m isort .isort.cfg .
 	poetry run python -m black --line-length 130 .
 
 .PHONY: test
