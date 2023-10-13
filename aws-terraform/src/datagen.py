@@ -21,9 +21,7 @@ class Data(BaseModel):
     @validator("X")
     def validate_X(cls, value):
         if value.shape != (cls._nsamples, cls._nfeature):
-            raise ValueError(
-                f"X must have {cls._nfeature} features and {cls._nsamples} samples."
-            )
+            raise ValueError(f"X must have {cls._nfeature} features and {cls._nsamples} samples.")
         return value
 
     @validator("y")
@@ -33,9 +31,7 @@ class Data(BaseModel):
         return value
 
     def split_data(self, test_size=0.2):
-        X_train, X_test, y_train, y_test = train_test_split(
-            self.X, self.y, test_size=test_size
-        )
+        X_train, X_test, y_train, y_test = train_test_split(self.X, self.y, test_size=test_size)
         return X_train, y_train, X_test, y_test
 
 
@@ -53,9 +49,7 @@ class DataGenerator(BaseModel):
         ...,
         description="Intercepts of the model to generate training data, 3 values are need.",
     )
-    bias: float = Field(
-        ..., description="Bias of the model to generate training data, 1 value is need."
-    )
+    bias: float = Field(..., description="Bias of the model to generate training data, 1 value is need.")
 
     @validator("intercepts")
     def validate_intercepts(cls, value):
@@ -65,9 +59,5 @@ class DataGenerator(BaseModel):
 
     def generate_data(self):
         X = np.random.rand(self._nsamples, self._nfeature)
-        y = (
-            np.dot(X, np.array(self.intercepts))
-            + self.bias
-            + np.random.normal(0, 1, self._nsamples)
-        )
+        y = np.dot(X, np.array(self.intercepts)) + self.bias + np.random.normal(0, 1, self._nsamples)
         return Data(X=X, y=y)
