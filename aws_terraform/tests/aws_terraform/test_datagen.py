@@ -1,5 +1,5 @@
 import pytest
-from src.datagen import Data, DataGenerator
+from aws_terraform.datagen import Data, DataGenerator
 import numpy as np
 
 
