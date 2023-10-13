@@ -19,9 +19,9 @@ jobs:
 
       - name: Install Dependencies
         run: make init
-        working-directory: aws-terraform
+        working-directory: aws_terraform
 
       - name: Run Python Script
         run: make workflow
-        working-directory: aws-terraform
+        working-directory: aws_terraform
 
