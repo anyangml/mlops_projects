@@ -12,9 +12,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Change Working Directory
-        run: cd aws-terraform
-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -22,7 +19,9 @@ jobs:
 
       - name: Install Dependencies
         run: make format
+        working-directory: aws-terraform
 
       - name: Run Python Script
         run: make workflow
+        working-directory: aws-terraform
 
