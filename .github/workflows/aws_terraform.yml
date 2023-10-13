@@ -1,9 +1,6 @@
 name: aws_terraform
 
-on:
-  repository_dispatch:
-    types: 
-      - trigger-workflow
+on: workflow_dispatch
       
 jobs:
   run-python-script:
