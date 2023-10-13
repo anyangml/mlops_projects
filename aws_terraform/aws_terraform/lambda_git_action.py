@@ -1,5 +1,5 @@
 """
-This is a sample Lambda function that is triggered by a GitHub webhook.
+This is a sample Lambda function that triggers a GitHub Action workflow.
 The code is not runnable as is, credentails need to be filled in.
 A better approach would be using AWS Secrets Manager, but it's not free.
 For the purpose of this example, the credentials are hardcoded in the code.
