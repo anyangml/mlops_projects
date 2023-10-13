@@ -72,7 +72,7 @@ resource "aws_lambda_function" "my_lambda_function" {
   filename         = "lambda.zip"
   function_name    = "aws_terraform_model_training"
   runtime          = "python3.8"
-  handler          = "index.handler"
+  handler          = "lambda_trigger.lambda_handler"
   role             = aws_iam_role.lambda_role.arn
 }
 
