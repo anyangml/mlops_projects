@@ -1,11 +1,14 @@
-# TODO
+# MLops Demo
 
 A regression problem need to be retrained every time new batch data is available.
-- training workflow orchestrated by prefect.
-- training monitered by mlfolw.
-- model registery based on s3.
-- model inference served with aws api gateway & lambda.
-- circleci to manage integration/prod deployment.
+
+- Everytime a new batch of data is uploaded to the S3 bucket, a Lambda function is triggered.
+- The Lambda function sends a command to trigger a git action workflow (can also use circleci).
+- The workflow is orchestrated by prefect:
+  - Download the data from S3
+  - Validate the data
+  - Train a regression model and dockerize the model
+- The workflow then deploy the model with aws api gateway & lambda
 - monitering with grafana.
 
 
