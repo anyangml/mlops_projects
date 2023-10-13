@@ -21,4 +21,4 @@ test: ## run unit tests
 
 .PHONY: workflow
 workflow: ## run the ML workflow
-	poetry run python -m src/workflow.py
+	poetry run python -m aws_terraform/workflow.py
