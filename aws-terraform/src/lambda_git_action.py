@@ -17,7 +17,9 @@ def lambda_handler(event, context):
         "X-GitHub-Api-Version": "2022-11-28"
     }
 
-    response = requests.post(url, headers=headers)
+    payload = '{"ref": "main","inputs": {}}'
+
+    response = requests.post(url, headers=headers, data=payload)
    
     if response.status_code == 204:
         return {
