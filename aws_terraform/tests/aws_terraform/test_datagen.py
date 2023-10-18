@@ -11,7 +11,7 @@ def test_data_validation():
 def test_data_split(X, y):
     data = Data(X=X, y=y)
 
-    X_train, y_train, X_test, y_test = data.split_data(test_size=0.2)
+    X_train, X_test, y_train, y_test = data.split_data(test_size=0.2)
 
     assert len(X_train) == 4000
     assert len(X_test) == 1000

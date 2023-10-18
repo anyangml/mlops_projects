@@ -25,4 +25,7 @@ def lambda_handler(event, context):
     if response.status_code == 204:
         return {"statusCode": 200, "body": "Workflow triggered successfully!"}
     else:
-        return {"statusCode": response.status_code, "body": "Failed to trigger workflow!"}
+        return {
+            "statusCode": response.status_code,
+            "body": "Failed to trigger workflow!",
+        }
