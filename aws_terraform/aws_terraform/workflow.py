@@ -23,10 +23,10 @@ def download_data():
     )
     obj = s3.get_object(Bucket=BUCKET_NAME, Key=OBJECT_NAME + FILE_NAME)
     pd.read_csv(obj["Body"], header=None).to_csv(
-        "mockdata1.csv", index=False, sep=",", header=None
+        FILE_NAME, index=False, sep=",", header=None
     )
 
-    downloaded_file = Path("mockdata1.csv")
+    downloaded_file = Path(FILE_NAME)
     if downloaded_file.is_file():
         print("File downloaded successfully")
     else:
@@ -43,6 +43,7 @@ def train_model():
 @flow(log_prints=True)
 def workflow():
     download_data()
+    # usually there will be more tasks: data validation, preprocessing.
     train_model()
 
 
