@@ -18,8 +18,6 @@ A regression problem need to be retrained every time new batch data is available
 - The workflow then deploy the model with aws api gateway & lambda
 - monitering with grafana.
 
-### To Do
-- add api gateway endpoint to handle inference lambda (docker too large for free tier ECR, not implemented)
 
 # References
 - [prepare lambda deployment package](https://docs.aws.amazon.com/lambda/latest/dg/python-package.html)
