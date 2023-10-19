@@ -3,18 +3,23 @@
 A regression problem need to be retrained every time new batch data is available.
 
 - Everytime a new batch of data is uploaded to the S3 bucket, a Lambda function is triggered.
+  <img width="1078" alt="Screenshot 2023-10-19 at 1 51 36 PM" src="https://github.com/anyangml/mlops_projects/assets/137014849/3c2d4ed2-b541-4bf1-bc23-0ec78adf4508">
+
 - The Lambda function sends a command to trigger a git action workflow (can also use circleci).
+  <img width="1386" alt="image" src="https://github.com/anyangml/mlops_projects/assets/137014849/02398087-15fd-4567-9b87-ab0fdac742cd">
 - The workflow is orchestrated by prefect:
   - Download the data from S3
   - Validate the data
   - Train a regression model and upload to S3
   - Build lambda function to serve inference and build with docker
+  <img width="1528" alt="Screenshot 2023-10-19 at 1 17 08 PM" src="https://github.com/anyangml/mlops_projects/assets/137014849/e14fd7fb-2a8a-4562-b576-4f59596312a6">
+<img width="1162" alt="Screenshot 2023-10-19 at 1 16 43 PM" src="https://github.com/anyangml/mlops_projects/assets/137014849/aa036fa1-37fa-427b-bb09-a7ae706aa7da">
+
 - The workflow then deploy the model with aws api gateway & lambda
 - monitering with grafana.
 
 ### To Do
-- add inference lambda handler to pull model and inference
-- add api gateway endpoint to handle inference lambda
+- add api gateway endpoint to handle inference lambda (docker too large for free tier ECR, not implemented)
 
 # References
 - [prepare lambda deployment package](https://docs.aws.amazon.com/lambda/latest/dg/python-package.html)
