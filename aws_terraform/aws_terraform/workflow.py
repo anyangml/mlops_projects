@@ -5,6 +5,8 @@ import os
 from dotenv import load_dotenv
 from pathlib import Path
 import pandas as pd
+import joblib
+import tempfile
 
 
 @task(retries=3, retry_delay_seconds=5)
@@ -31,6 +33,7 @@ def download_data():
         print("File downloaded successfully")
     else:
         raise Exception("File not downloaded")
+    return s3
 
 
 @task
@@ -40,11 +43,28 @@ def train_model():
     trainer.fit()
 
 
+@task(retries=3, retry_delay_seconds=5)
+def upload_model(s3):
+    model = joblib.load("model.pkl")
+
+    BUCKET_NAME = os.getenv("BUCKET_NAME")
+    MODEL_OBJECT_NAME = os.getenv("MODEL_OBJECT_NAME")
+
+    with tempfile.TemporaryFile() as fp:
+        joblib.dump(model, fp)
+        fp.seek(0)
+        s3.put_object(
+            Body=fp.read(), Bucket=BUCKET_NAME, Key=MODEL_OBJECT_NAME + "model.pkl"
+        )
+    print("Model uploaded successfully")
+
+
 @flow(log_prints=True)
 def workflow():
-    download_data()
+    s3 = download_data()
     # usually there will be more tasks: data validation, preprocessing.
     train_model()
+    upload_model(s3)
 
 
 if __name__ == "__main__":

@@ -7,12 +7,12 @@ A regression problem need to be retrained every time new batch data is available
 - The workflow is orchestrated by prefect:
   - Download the data from S3
   - Validate the data
-  - Train a regression model and dockerize the model
+  - Train a regression model and upload to S3
+  - Build lambda function to serve inference and build with docker
 - The workflow then deploy the model with aws api gateway & lambda
 - monitering with grafana.
 
 ### To Do
-- add model push to s3 in workflow.
 - add inference lambda handler to pull model and inference
 - add api gateway endpoint to handle inference lambda
 
