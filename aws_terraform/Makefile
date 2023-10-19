@@ -22,3 +22,7 @@ test: ## run unit tests
 .PHONY: workflow
 workflow: ## run the ML workflow
 	poetry run python aws_terraform/workflow.py
+
+.PHONY: build
+workflow: ## update docker image
+	poetry run docker build -t aws_flask .
