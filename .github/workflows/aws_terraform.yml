@@ -1,13 +1,11 @@
 name: aws_terraform
 
-
 on:
   workflow_dispatch
 
 jobs:
-  run-python-script:
+  aws-training-workflow:
     runs-on: ubuntu-latest
-      
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -25,3 +23,10 @@ jobs:
         run: make workflow
         working-directory: aws_terraform
 
+  build-docker-image:
+    runs-on: ubuntu-latest
+    needs:
+      - aws-training-workflow
+    steps:
+      - name: Build Docker Image
+        run: make build
