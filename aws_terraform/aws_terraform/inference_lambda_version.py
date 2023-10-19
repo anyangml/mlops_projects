@@ -23,5 +23,5 @@ def predict_handler(event, context):
 
     features = np.array(event["feature"]).reshape(1, -1)
     prediction = model.predict(features)
-    return {"prediction": prediction.tolist()}
+    return {"prediction": prediction.tolist(), "coefficient": model.coef_.tolist(), "intercept": model.intercept_.tolist}
 
